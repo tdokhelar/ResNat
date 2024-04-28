@@ -1,65 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Ma Carte</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <style>
-        #map { height: 400px; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site ResNat 2.0</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="map"></div>
-    <form id="pointForm">
-        <input type="text" id="name" placeholder="Nom du lieu" required><br>
-        <input type="text" id="description" placeholder="Description" required><br>
-        <input type="number" step="0.0001" id="latitude" placeholder="Latitude" required><br>
-        <input type="number" step="0.0001" id="longitude" placeholder="Longitude" required><br>
-        <button type="submit">Ajouter un point</button>
-    </form>
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js"></script>
-    <script>
-        // Initialise Firebase avec ta configuration
-        const firebaseConfig = {
-            apiKey: "TA_CLE_API",
-            authDomain: "TON_DOMAINE.firebaseapp.com",
-            databaseURL: "https://TON_DOMAINE.firebaseio.com",
-            projectId: "TON_PROJET",
-            storageBucket: "TON_PROJET.appspot.com",
-            messagingSenderId: "TON_SENDER_ID",
-            appId: "TON_APP_ID"
-        };
-        firebase.initializeApp(firebaseConfig);
+    <header>
+        <h1>Site ResNat 2.0</h1>
+    </header>
 
-        const database = firebase.database();
-        
-        // Crée la carte Leaflet
-        var map = L.map('map').setView([51.505, -0.09], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    <section id="map"></section>
 
-        // Ajoute un écouteur d'événement sur le formulaire
-        document.getElementById('pointForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Récupère les valeurs du formulaire
-            var name = document.getElementById('name').value;
-            var description = document.getElementById('description').value;
-            var latitude = parseFloat(document.getElementById('latitude').value);
-            var longitude = parseFloat(document.getElementById('longitude').value);
-            // Envoie les données à Firebase
-            database.ref('points').push({
-                name: name,
-                description: description,
-                latitude: latitude,
-                longitude: longitude
-            });
-            // Ajoute un marqueur sur la carte
-            L.marker([latitude, longitude]).addTo(map)
-                .bindPopup(name + '<br>' + description)
-                .openPopup();
-            // Réinitialise le formulaire
-            document.getElementById('pointForm').reset();
-        });
-    </script>
+    <footer>
+        <p>&copy; 2024 Site ResNat 2.0. Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/gh/pixelhumain/GoGoCartoJs/dist/gogocarto.bundle.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
