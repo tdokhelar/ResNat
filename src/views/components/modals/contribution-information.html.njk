@@ -1,0 +1,15 @@
+<div id="modal-contribution"  class="modal page-modal about-modal custom-scroll-bar-light">
+    <div class="modal-content page-modal-content">
+        <span class="icon btn-back gogo-icon-material-design-icons-1" onclick="$('#modal-contribution').closeModal()"></span>
+        <h1>Modération collabortive</h1>
+	    	{{ config.text.collaborativeModeration | safe }}
+		<div class="page-modal-footer">
+		<button type="button"
+				onclick="$('#modal-contribution').closeModal()"  
+				class="btn waves-effect waves-light">
+			OK!
+		</button>
+		</div>
+
+    </div>
+</div>
