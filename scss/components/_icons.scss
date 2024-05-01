@@ -1,0 +1,50 @@
+.cluster
+{
+	z-index: 2;
+}
+
+.icon
+{
+	font-size: 1.4rem;
+  padding-top: 3px;
+  @media #{$small-only} { padding-top: 2px; }
+  float: left;
+  margin-right: 1rem;
+}
+
+.icon.disabled
+{
+	color: #DFDFDF;
+}
+
+#directory-menu .main-categories .icon.main-icon.fa 
+{
+  font-size: 1.2rem;
+
+  &:before { position: relative; left: 0; top: 0; }
+}
+
+.icon.fa 
+{
+  padding-top: .5rem;
+  font-size: 1.3rem;
+}
+
+.element-main-icon.icon.fa
+{
+  padding-top: 4px;
+}
+
+.iconInsideMarker.fa 
+{
+  padding-top: 0;
+}
+
+.filter-menu .icon.fa
+{
+  padding-top: .7rem;
+  width: 1.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+

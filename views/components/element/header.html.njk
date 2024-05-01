@@ -1,0 +1,72 @@
+
+{# Header Title #}
+<div class='collapsible-header-title row'>
+
+  <span class="name">
+
+    {% set mainIcon = 'gogo-icon-attention' if isPending and config.isFeatureAvailable('pending') else mainOptionToDisplay.option.icon %}
+    {# Icon #}
+    <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionToDisplay.colorOptionId}}></span>
+       
+    {# Close Button #}
+    <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-bandeau-detail"></span>            
+
+    {# Name #}
+    {{ element.name|safe }}
+    {% if isDeleted %}</br><u>(Cet élément a été refusé ou supprimé)</u>{% endif %}
+
+    {# Distance #}
+    {% if showDistance and distance != null %}
+      <span class="distance gogo-neutral">~ {{ distance if isMapMode else distanceFromBoundsCenter }} km</span>
+    {% endif %}    
+
+    {# Short address (for list mode) #}
+    {% set address = element.originalAddress %}
+    {% if address %}
+      <span class="location gogo-neutral">
+        {% if address.postalCode %}<span class="postalCode">{{ address.postalCode }}</span>{% endif %}
+        {% if address.addressLocality %}<span class="city"> {{ address.addressLocality }}</span>{% endif %}
+      </span>
+    {% endif %}
+
+  </span>
+  
+</div>
+
+{# Header More #}
+<div class='collapsible-header-more row'>
+
+  <div class="custom-header">{{ header|safe }}</div>  
+
+  {# Categories litteral #}
+  <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
+    
+    {% set lastIconToDisplay = '' %}
+    {% for optionValue in currOptionsValues %}       
+      <span class="inline-option-value {{ 'main-option' if optionValue.option.isMainOption else '' }}">
+        {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
+        {% set option = optionValue.option %}
+        {% set icon = option.icon %}
+        {% set parentIcon = option.getOwner().getOwner().icon if option.getOwner() else '' %}
+        {% set iconToDisplay = parentIcon if parentIcon and not option.useIconForMarker else icon %}
+
+        {% set sameIcon = iconToDisplay == lastIconToDisplay %}
+        {% if iconToDisplay and not sameIcon %}    
+          <span class="icon {{ iconToDisplay }} bgdColorAs colorAs" option-id='{{ option.id }}' ></span>
+        {% endif %}
+        {% set lastIconToDisplay = iconToDisplay %}
+
+        <span class="option-value {{ isDisabled }} {{ 'same-icon-as-last-item' if sameIcon else '' }} colorAs" option-id='{{ option.id }}'>{{ option.nameShort }}</span>   
+      </span>      
+    {% endfor %}
+
+    {% if not currOptionsValues|length %}
+      <span class="option-value">{{ mainOptionToDisplay.option.name }}</span>       
+    {% endif %}
+
+  </span>      
+
+  {# Toggle Details Buttons #}
+  <a><span class="col s4 right-align expandLabel gogo-neutral-dark hideOnLargeScreen bgdSoftColorAs transform-big" option-id={{mainOptionToDisplay.colorOptionId}}></span></a>
+
+</div> 

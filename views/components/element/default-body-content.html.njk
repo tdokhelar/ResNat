@@ -1,0 +1,58 @@
+{# -------------- #}
+{#  BODY DEFAULT  #}
+{# -------------- #}
+{{ descriptionMore|gogo_textarea(truncate = 400) }}
+
+{% if address or telephone or email or website or element.urls %}
+  {# Contact infos #}
+  {{ 'Informations générales'|gogo_title }}
+
+  {# Address #}
+  {{ address|gogo_text }}
+
+  {# Tel #}
+  {{ telephone|gogo_tel }}
+
+  {# Mail #}
+  {{ email|gogo_email }}
+
+  {# WebSite #}
+  {{ website|gogo_url }}
+
+  {% set urls = element.urls %}
+  {% if urls %}
+    {% for currentUrl in urls %}
+      {{ url.value|gogo_url }}
+    {% endfor %}    
+  {% endif %}
+
+  {{ ''|gogo_separator }}
+
+{% endif %}
+
+{# Categories  #}
+{{ taxonomy|gogo_taxonomy }}
+
+{{ tags|gogo_tags}}
+
+{% if commitment %}
+{{ ''|gogo_separator }}
+{{ 'Engagement Citoyen'|gogo_title }}
+{{ commitment|gogo_textarea(truncate = 400) }}
+{% endif %}
+
+{# Open Hours #}
+{% if formatedOpenHours|length or openHoursMoreInfos %}
+  {{ ''|gogo_separator }}
+  {{ "Horaires d'ouverture"|gogo_title }}
+  {{ formatedOpenHours|gogo_openhours }}
+  {{ openHoursMoreInfos|gogo_text }}
+{% endif %}
+
+{# Vidéo #}
+{% if vimeoId %}
+  {{ ''|gogo_separator }}
+  {{ 'Video'|gogo_title }}
+  {{ vimeoId|gogo_vimeo }}
+{% endif %}
+

@@ -1,0 +1,15 @@
+.collapsible-body
+{
+  background-color: transparent;
+  padding: 0;
+  position: relative;
+
+  .collapsible-body-main-content
+  {
+    background-color: #F7F7F7;
+    padding: .8rem;
+    line-height: 2rem;  
+
+    @media #{$medium-and-up} { padding: 1rem; }    
+  }  
+}
